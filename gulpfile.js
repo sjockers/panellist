@@ -62,6 +62,7 @@ function compileScripts(watch) {
     bundler.require(requireFiles);
     bundler.transform(reactify);
     bundler.transform(es6ify.configure(/.jsx/));
+    bundler.transform(es6ify.configure(/^(?!.*node_modules)+.+\.(js|jsx)$/));
 
     var rebundle = function () {
         var stream = bundler.bundle({ debug: true});
