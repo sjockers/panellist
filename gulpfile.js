@@ -12,7 +12,9 @@ var watchify = require('watchify');
 var es6ify = require('es6ify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
-
+var combiner = require('stream-combiner2');
+var less = require('gulp-less');
+var autoprefixer = require('gulp-autoprefixer');
 
 /** Config variables */
 var serverPort = 8888;
@@ -29,6 +31,9 @@ var vendorFiles = ['node_modules/es6ify/node_modules/traceur/bin/traceur-runtime
 var vendorBuild = dist + '/vendor';
 var requireFiles = './node_modules/react/react.js';
 
+var cssSource = 'app/styles';
+var cssBuild = dist + '/styles';
+var mainLessFile = '/panellist.less';
 
 gulp.task('vendor', function () {
   return gulp.src(vendorFiles).
@@ -39,6 +44,25 @@ gulp.task('vendor', function () {
 gulp.task('html', function () {
   return gulp.src(htmlFiles).
     pipe(gulp.dest(htmlBuild));
+});
+
+/* Compile, minify, and compress LESS files */
+gulp.task('less', function() {
+  var combined = combiner.obj([
+    gulp.src(cssSource + mainLessFile),
+    less(),
+    autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }),
+    gulp.dest(cssBuild)
+  ]);
+
+  // any errors in the above streams will get caught
+  // by this listener, instead of being thrown:
+  combined.on('error', console.error.bind(console));
+
+  return combined;
 });
 
 
@@ -98,6 +122,7 @@ gulp.task('default', ['vendor', 'server'], function () {
 
   compileScripts(true);
   initWatch(htmlFiles, 'html');
+  initWatch(cssSource + '/*.less', ['less']);
 
   gulp.watch([dist + '/**/*'], reloadPage);
 });
