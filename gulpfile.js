@@ -49,7 +49,7 @@ gulp.task('html', function () {
 function compileScripts(watch) {
     gutil.log('Starting browserify');
 
-    var entryFile = './app/jsx/app.jsx';
+    var entryFile = './app/panellist.js';
     es6ify.traceurOverrides = {experimental: true};
 
     var bundler;
@@ -61,7 +61,6 @@ function compileScripts(watch) {
 
     bundler.require(requireFiles);
     bundler.transform(reactify);
-    bundler.transform(es6ify.configure(/.jsx/));
     bundler.transform(es6ify.configure(/^(?!.*node_modules)+.+\.(js|jsx)$/));
 
     var rebundle = function () {
@@ -69,7 +68,7 @@ function compileScripts(watch) {
 
         stream.on('error', function (err) { console.error(err) });
         stream = stream.pipe(source(entryFile));
-        stream.pipe(rename('app.js'));
+        stream.pipe(rename('panellist.js'));
 
         stream.pipe(gulp.dest('dist/bundle'));
     }
