@@ -1,8 +1,9 @@
 import View from 'ampersand-view';
 import Panel from './panel.js';
+import slideTemplate from '../templates/slide.handlebars';
 
 const Slide = View.extend({
-  template: '<div>SLIDE<ul></ul></div>',
+  template: slideTemplate,
   
   render(opts) {
     this.renderWithTemplate(this);

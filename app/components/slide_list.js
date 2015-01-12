@@ -1,8 +1,9 @@
 import View from 'ampersand-view';
 import Slide from './slide.js';
+import slideListTemplate from '../templates/slide_list.handlebars';
 
 const SlideList = View.extend({
-  template: '<main><h1>SLIDE LIST</h1><span data-hook="slides"></span></main>',
+  template: slideListTemplate,
   
   render: function (opts) {
     this.renderWithTemplate(this);

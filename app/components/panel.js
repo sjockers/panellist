@@ -1,13 +1,8 @@
 import View from 'ampersand-view';
+import panelTemplate from '../templates/panel.handlebars';
 
 const Panel = View.extend({
-  template: function (context) {
-    return [
-      '<li class="slide" style="background:' + context.model.background + '">',
-      '  <span >PANEL</span>',
-      '</li>'
-    ].join('\n');
-  }
+  template: panelTemplate
 });
 
 export default Panel;

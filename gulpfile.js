@@ -8,6 +8,7 @@ var connect = require('connect');
 
 var rename = require('gulp-rename');
 var browserify = require('browserify');
+var browserifyHandlebars = require('browserify-handlebars');
 var watchify = require('watchify');
 var es6ify = require('es6ify');
 var source = require('vinyl-source-stream');
@@ -63,6 +64,15 @@ gulp.task('less', function() {
   return combined;
 });
 
+// gulp.task('scripts', function() {
+//     // Single entry point to browserify
+//     gulp.src('src/js/app.js')
+//       .pipe(browserify({
+//         transform: [browserifyHandlebars],
+//         debug : !gulp.env.production
+//       }))
+//       .pipe(gulp.dest('./build/js'));
+// });
 
 function compileScripts(watch) {
   gutil.log('Starting browserify');
@@ -76,6 +86,8 @@ function compileScripts(watch) {
   } else {
     bundler = browserify(entryFile);
   }
+
+  bundler.transform(browserifyHandlebars);  
 
   bundler.transform(es6ify.configure(/^(?!.*node_modules)+.+\.(js|jsx)$/));
 
