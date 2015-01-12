@@ -1,7 +1,11 @@
 {
   "name": "react-es6-browserify",
   "version": "0.0.4",
-  "dependencies": {},
+  "dependencies": {
+    "ampersand-view": "^7.2.0",
+    "ampersand-collection": "^1.3.17",
+    "ampersand-state": "^4.4.4"
+  },
   "devDependencies": {
     "browserify": "^3.46.0",
     "connect": "^2.15.0",
@@ -10,15 +14,13 @@
     "gulp-browserify": "^0.5.0",
     "gulp-livereload": "^1.3.1",
     "gulp-rename": "^1.2.0",
-    "reactify": "^0.17.1",
     "vinyl-source-stream": "^0.1.1",
     "envify": "^1.2.1",
-    "react": "^0.12.0",
     "watchify": "^0.8.3",
     "gulp-util": "^2.2.14",
     "stream-combiner2": "^1.0.2",
     "gulp-less": "~1.3.6",
-    "gulp-autoprefixer": "^2.0.0"    
+    "gulp-autoprefixer": "^2.0.0"
   },
   "engines": {
     "node": ">=0.10.0"

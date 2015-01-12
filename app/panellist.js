@@ -1,12 +1,68 @@
-import React from 'react';
-import SlideList from './jsx/components/slide_list.jsx';
+import State from 'ampersand-state';
+import Collection from 'ampersand-collection';
+import View from 'ampersand-view';
+import SlideList from './components/slide_list.js';
 
-var data = [
-  {foo: "Mickey Mouse", bar: "Mickey says hi!"},
-  {foo: "Donald Duck", bar: "Donald says hi!"}
-];
+const PanelModel = State.extend({
+	props: {
+		background: 'string'
+	}
+});
 
-React.render(
-  React.createElement(SlideList, {data}),
-  document.getElementById('content')
-); 
+const PanelCollection = Collection.extend({
+	model: PanelModel
+});
+
+const SlideModel = State.extend({
+	collections: {
+		panels: PanelCollection
+	}
+});
+
+const SlideCollection = Collection.extend({
+	model: SlideModel
+});
+
+const data = new SlideCollection([
+  {
+  	panels: [
+  		{
+  			background: 'red'
+  		},
+   		{
+  			background: 'green'
+  		},
+   		{
+  			background: 'blue'
+  		},
+   		{
+  			background: 'purple'
+  		}
+  	]
+  },
+  {
+  	panels: [
+  		{
+  			background: 'green'
+  		},
+   		{
+  			background: 'yellow'
+  		}
+  	]
+  }
+]);
+
+const MainView = View.extend({
+	template: '<main><span data-hook="slides"></span></main>',
+
+  render() {
+		this.renderWithTemplate();
+		this.renderSubview(new SlideList({collection: data}), '[data-hook=slides]');  	
+  }
+});
+
+const mainView = new MainView({
+  el: document.getElementById('content'),
+});
+
+mainView.render();

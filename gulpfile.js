@@ -10,7 +10,6 @@ var rename = require('gulp-rename');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var es6ify = require('es6ify');
-var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var combiner = require('stream-combiner2');
 var less = require('gulp-less');
@@ -29,7 +28,6 @@ var htmlBuild = dist;
 
 var vendorFiles = ['node_modules/es6ify/node_modules/traceur/bin/traceur-runtime.js'];
 var vendorBuild = dist + '/vendor';
-var requireFiles = './node_modules/react/react.js';
 
 var cssSource = 'app/styles';
 var cssBuild = dist + '/styles';
@@ -79,8 +77,6 @@ function compileScripts(watch) {
     bundler = browserify(entryFile);
   }
 
-  bundler.require(requireFiles);
-  bundler.transform(reactify);
   bundler.transform(es6ify.configure(/^(?!.*node_modules)+.+\.(js|jsx)$/));
 
   var rebundle = function () {
