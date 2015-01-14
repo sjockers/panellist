@@ -10,7 +10,7 @@ var rename = require('gulp-rename');
 var browserify = require('browserify');
 var browserifyHandlebars = require('browserify-handlebars');
 var watchify = require('watchify');
-var es6ify = require('es6ify');
+var to5ify = require('6to5ify');
 var source = require('vinyl-source-stream');
 var combiner = require('stream-combiner2');
 var less = require('gulp-less');
@@ -27,18 +27,9 @@ var dist = 'dist';
 var htmlFiles = 'app/**/*.html';
 var htmlBuild = dist;
 
-var vendorFiles = ['node_modules/es6ify/node_modules/traceur/bin/traceur-runtime.js'];
-var vendorBuild = dist + '/vendor';
-
 var cssSource = 'app/styles';
 var cssBuild = dist + '/styles';
 var mainLessFile = '/panellist.less';
-
-gulp.task('vendor', function () {
-  return gulp.src(vendorFiles).
-    pipe(gulp.dest(vendorBuild));
-});
-
 
 gulp.task('html', function () {
   return gulp.src(htmlFiles).
@@ -64,47 +55,32 @@ gulp.task('less', function() {
   return combined;
 });
 
-// gulp.task('scripts', function() {
-//     // Single entry point to browserify
-//     gulp.src('src/js/app.js')
-//       .pipe(browserify({
-//         transform: [browserifyHandlebars],
-//         debug : !gulp.env.production
-//       }))
-//       .pipe(gulp.dest('./build/js'));
-// });
-
 function compileScripts(watch) {
   gutil.log('Starting browserify');
 
   var entryFile = './app/panellist.js';
-  es6ify.traceurOverrides = {experimental: true};
-
   var bundler;
+
+  var rebundle = function () {
+    var stream = bundler.bundle({ debug: true});
+    stream.on('error', function (err) { console.error(err); });
+    stream = stream.pipe(source(entryFile));
+    stream.pipe(rename('panellist.js'));
+    stream.pipe(gulp.dest('dist/bundle'));
+  };
+
   if (watch) {
     bundler = watchify(entryFile);
   } else {
     bundler = browserify(entryFile);
   }
 
-  bundler.transform(browserifyHandlebars);  
-
-  bundler.transform(es6ify.configure(/^(?!.*node_modules)+.+\.(js|jsx)$/));
-
-  var rebundle = function () {
-    var stream = bundler.bundle({ debug: true});
-
-    stream.on('error', function (err) { 
-      console.error(err); 
-    });
-    
-    stream = stream.pipe(source(entryFile));
-    stream.pipe(rename('panellist.js'));
-
-    stream.pipe(gulp.dest('dist/bundle'));
-  };
-    
   bundler.on('update', rebundle);
+  bundler.on('error', function (err) { console.log("Error : " + err.message); })
+
+  bundler.transform(browserifyHandlebars);  
+  bundler.transform(to5ify.configure({ only: /app/ }));
+
   return rebundle();
 }
 
@@ -117,7 +93,7 @@ gulp.task('server', function (next) {
 /**
  * Run default task
  */
-gulp.task('default', ['vendor', 'server'], function () {
+gulp.task('default', ['server'], function () {
   var lrServer = livereload(lrPort);
   var reloadPage = function (evt) {
     lrServer.changed(evt.path);
