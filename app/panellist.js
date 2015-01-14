@@ -49,7 +49,244 @@ const data = new SlideCollection([
   			background: 'yellow'
   		}
   	]
-  }
+  },
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },  
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },        
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },  
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },  
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  },  
+  {
+    panels: [
+      {
+        background: 'red'
+      },
+      {
+        background: 'green'
+      },
+      {
+        background: 'blue'
+      },
+      {
+        background: 'purple'
+      }
+    ]
+  },
+  {
+    panels: [
+      {
+        background: 'green'
+      },
+      {
+        background: 'yellow'
+      }
+    ]
+  }  
+
+
+
 ]);
 
 const MainView = View.extend({

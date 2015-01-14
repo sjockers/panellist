@@ -1,1 +1,1 @@
-<main><h1>SLIDE LIST</h1><span data-hook="slides"></span></main>
+<main class='slide-list'><span data-hook="slides"></span></main>
