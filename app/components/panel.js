@@ -1,5 +1,5 @@
 import View from 'ampersand-view';
-import panelTemplate from '../templates/panel.handlebars';
+import ViewScrollMixin from './view-scroll-mixin.js';
 
 const Panel = View.extend({
   template: panelTemplate

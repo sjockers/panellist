@@ -8,7 +8,7 @@ var connect = require('connect');
 
 var rename = require('gulp-rename');
 var browserify = require('browserify');
-var browserifyHandlebars = require('browserify-handlebars');
+var domthingify = require('domthingify');
 var watchify = require('watchify');
 var to5ify = require('6to5ify');
 var source = require('vinyl-source-stream');
@@ -78,7 +78,7 @@ function compileScripts(watch) {
   bundler.on('update', rebundle);
   bundler.on('error', function (err) { console.log("Error : " + err.message); })
 
-  bundler.transform(browserifyHandlebars);  
+  bundler.transform(domthingify);  
   bundler.transform(to5ify.configure({ only: /app/ }));
 
   return rebundle();

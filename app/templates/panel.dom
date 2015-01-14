@@ -1,0 +1,5 @@
+<li class="panel" style="
+  background: {{ model.background }}
+">
+  <span>PANEL {{ model.background }}</span>
+</li>
