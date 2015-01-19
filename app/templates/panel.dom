@@ -1,6 +1,8 @@
-<li class="panel {{ active }}" style="
-  background: {{ model.background }};
-  opacity: {{ opacity }}
-">
-  <span>PANEL {{ model.background }}</span>
+<li class="panel {{ active }}">
+  <div class="panel__inner" style="
+    background: {{ model.background }};
+    opacity: {{ opacity }};
+    top: {{ top }}px;
+    right: {{ right }}px;
+  ">PANEL {{ model.background }}</div>
 </li>

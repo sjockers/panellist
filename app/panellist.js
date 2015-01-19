@@ -153,7 +153,7 @@ const data = new SlideCollection([
         background: 'yellow'
       }
     ]
-  },  
+  },
   {
     panels: [
       {
@@ -179,7 +179,7 @@ const data = new SlideCollection([
         background: 'yellow'
       }
     ]
-  },        
+  },
   {
     panels: [
       {
@@ -205,7 +205,7 @@ const data = new SlideCollection([
         background: 'yellow'
       }
     ]
-  },  
+  },
   {
     panels: [
       {
@@ -231,7 +231,7 @@ const data = new SlideCollection([
         background: 'yellow'
       }
     ]
-  },  
+  },
   {
     panels: [
       {
@@ -257,7 +257,7 @@ const data = new SlideCollection([
         background: 'yellow'
       }
     ]
-  },  
+  },
   {
     panels: [
       {
@@ -283,7 +283,7 @@ const data = new SlideCollection([
         background: 'yellow'
       }
     ]
-  }  
+  }
 
 
 
@@ -294,7 +294,7 @@ const MainView = View.extend({
 
   render() {
 		this.renderWithTemplate();
-		this.renderSubview(new SlideList({collection: data}), '[data-hook=slides]');  	
+		this.renderSubview(new SlideList({collection: data}), '[data-hook=slides]');
   }
 });
 

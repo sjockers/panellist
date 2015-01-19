@@ -9,7 +9,7 @@ function update() {
 
   Object.keys(callbacks).forEach(function(key) {
     callbacks[key](latestKnownScrollY);
-  });  
+  });
 }
 
 function requestTick() {
@@ -34,6 +34,8 @@ module.exports = {
   registerViewportScrollHandler: function(callbackFn) {
 
     window.addEventListener('scroll', onScroll);
+
+    requestTick();
 
     addScrollHandler(callbackFn, this.cid, this);
   }

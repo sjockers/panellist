@@ -11,20 +11,35 @@ const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
   render() {
     this.renderWithTemplate(this);
     this.registerViewportScrollHandler(this.handleScrolling);
-    this.el.update('opacity', '0');
+  },
+
+  updateCssProperty(propertyName, fromValue, toValue, scrollOffsetTop, positioning) {
+    var magicOffset = 300;
+
+    var inMin = this.el.offsetTop;
+    var inMax = this.el.offsetTop + this.el.clientHeight;
+    var inDelta = scrollOffsetTop - inMin + this.el.clientHeight + magicOffset;
+
+    var output = (fromValue - toValue) / (inMin - inMax) * inDelta;
+
+    if (fromValue > toValue) {
+      if (positioning) output = fromValue + output;
+      output = output <= toValue ? toValue : output;
+      output = output >= fromValue ? fromValue : output;
+    }
+    else {
+      if (positioning) output = toValue - output;
+      output = output >= toValue ? toValue : output;
+      output = output <= fromValue ? fromValue : output;
+    }
+
+    this.el.update(propertyName, output.toString());
   },
 
   handleScrolling(scrollOffsetTop) {
-    var magicOffset = 500;
-    var inMin = this.el.offsetTop; 
-    var inMax = this.el.offsetTop + this.el.clientHeight;
-    var inDelta = scrollOffsetTop - inMin + magicOffset;
-    var outMin = 0;
-    var outMax = 1;
-
-    var outDelta = (outMin - outMax) / (inMin - inMax) * inDelta;
-
-    this.el.update('opacity', outDelta.toString());
+    this.updateCssProperty('opacity', 0.1, 1, scrollOffsetTop);
+    this.updateCssProperty('top', 200, 0, scrollOffsetTop, true);
+    this.updateCssProperty('right', 100, -200, scrollOffsetTop, true);
   }
 });
 
