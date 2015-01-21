@@ -1,5 +1,6 @@
 import View from 'ampersand-view';
 import DomthingMixin from 'ampersand-domthing-mixin';
+import _ from 'underscore';
 
 import ViewScrollMixin from './view-scroll-mixin.js';
 import panelTemplate from '../templates/panel.dom';
@@ -8,19 +9,28 @@ const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
 
   template: panelTemplate,
 
-  render() {
+  render(opts) {
     this.renderWithTemplate(this);
+
+    if (this.model.subpanels) {
+      this.renderCollection(this.model.subpanels, (options) => {
+        return new Panel(options);
+      }, this.el.querySelector('[data-hook=subpanels]'), opts);
+    }
+
     this.registerViewportScrollHandler(this.handleScrolling);
   },
 
-  updateCssProperty(propertyName, fromValue, toValue, scrollOffsetTop, positioning) {
-    var magicOffset = 300;
+  updateCssProperty({propertyName, fromValue, toValue, offset}, scrollOffsetTop) {
+    let positioning = _.contains(['top', 'right', 'bottom', 'left'], propertyName);
 
-    var inMin = this.el.offsetTop;
-    var inMax = this.el.offsetTop + this.el.clientHeight;
-    var inDelta = scrollOffsetTop - inMin + this.el.clientHeight + magicOffset;
+    let bounds = this.el.getBoundingClientRect();
+    let height = this.el.clientHeight;
 
-    var output = (fromValue - toValue) / (inMin - inMax) * inDelta;
+    let inMin = bounds.top;
+    let inMax = bounds.top + height;
+    let inDelta = scrollOffsetTop - inMin + height + offset;
+    let output = (fromValue - toValue) / (inMin - inMax) * inDelta;
 
     if (fromValue > toValue) {
       if (positioning) output = fromValue + output;
@@ -37,9 +47,9 @@ const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
   },
 
   handleScrolling(scrollOffsetTop) {
-    this.updateCssProperty('opacity', 0.1, 1, scrollOffsetTop);
-    this.updateCssProperty('top', 200, 0, scrollOffsetTop, true);
-    this.updateCssProperty('right', 100, -200, scrollOffsetTop, true);
+    this.model.transitions.each( transition => {
+      this.updateCssProperty(transition, scrollOffsetTop);
+    });
   }
 });
 

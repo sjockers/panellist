@@ -1,300 +1,151 @@
-import State from 'ampersand-state';
 import Collection from 'ampersand-collection';
 import View from 'ampersand-view';
 import SlideList from './components/slide_list.js';
+import PanelModel from './panel_model.js';
 
-const PanelModel = State.extend({
-	props: {
-		background: 'string'
-	}
-});
-
-const PanelCollection = Collection.extend({
-	model: PanelModel
-});
-
-const SlideModel = State.extend({
-	collections: {
-		panels: PanelCollection
-	}
-});
-
-const SlideCollection = Collection.extend({
-	model: SlideModel
-});
-
-const data = new SlideCollection([
+const data = [
   {
-  	panels: [
-  		{
-  			background: 'red'
-  		},
-   		{
-  			background: 'green'
-  		},
-   		{
-  			background: 'blue'
-  		},
-   		{
-  			background: 'purple'
-  		}
-  	]
-  },
-  {
-  	panels: [
-  		{
-  			background: 'green'
-  		},
-   		{
-  			background: 'yellow'
-  		}
-  	]
-  },
-  {
-    panels: [
+    image: 'images/142_143_1.png',
+    offset: 200,
+    transitions: [{
+      propertyName: 'opacity',
+      fromValue: 0,
+      toValue: 1,
+      offset: -100
+    }],
+    subpanels: [
       {
-        background: 'red'
+        image: 'images/142_143_2.png',
+        position: {
+          top: 20,
+          left: 30
+        },
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -300
+        }]
       },
       {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
+        image: 'images/142_143_3.png',
+        position: {
+          bottom: 0,
+          right:  0
+        },
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -600
+        },
+        {
+          propertyName: 'top',
+          fromValue: 300,
+          toValue: 0,
+          offset: -600
+        }]
       }
     ]
   },
   {
-    panels: [
+    image: 'images/142_143_1.png',
+    offset: 200,
+    transitions: [{
+      propertyName: 'opacity',
+      fromValue: 0,
+      toValue: 1,
+      offset: -500
+    }],
+    subpanels: [
       {
-        background: 'green'
+        image: 'images/142_143_2.png',
+        position: {
+          top: 20,
+          left: 30
+        },
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -300
+        }]
       },
       {
-        background: 'yellow'
+        image: 'images/142_143_3.png',
+        position: {
+          bottom: 0,
+          right:  0
+        },
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -300
+        },
+        {
+          propertyName: 'top',
+          fromValue: 300,
+          toValue: 0,
+          offset: -600
+        }]
       }
     ]
   },
   {
-    panels: [
+    image: 'images/142_143_1.png',
+    offset: 200,
+    transitions: [{
+      propertyName: 'opacity',
+      fromValue: 0,
+      toValue: 1,
+      offset: -100
+    }],
+    subpanels: [
       {
-        background: 'red'
+        image: 'images/142_143_2.png',
+        position: {
+          top: 20,
+          left: 30
+        },
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -300
+        }]
       },
       {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'red'
-      },
-      {
-        background: 'green'
-      },
-      {
-        background: 'blue'
-      },
-      {
-        background: 'purple'
-      }
-    ]
-  },
-  {
-    panels: [
-      {
-        background: 'green'
-      },
-      {
-        background: 'yellow'
+        image: 'images/142_143_3.png',
+        position: {
+          bottom: 0,
+          right:  0
+        },
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -300
+        },
+        {
+          propertyName: 'top',
+          fromValue: 300,
+          toValue: 0,
+          offset: -600
+        }]
       }
     ]
   }
+];
 
-
-
-]);
+const panels = new Collection(data, {model: PanelModel});
 
 const MainView = View.extend({
-	template: '<main><span data-hook="slides"></span></main>',
+	template: '<div data-hook="panellist"></div>',
 
   render() {
 		this.renderWithTemplate();
-		this.renderSubview(new SlideList({collection: data}), '[data-hook=slides]');
+		this.renderSubview(new SlideList({collection: panels}), '[data-hook=panellist]');
   }
 });
 
