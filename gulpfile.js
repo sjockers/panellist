@@ -24,24 +24,16 @@ var lrPort = 35731;
 /** File paths */
 var dist = 'dist';
 
-var imageFiles = 'app/images/**/*';
-var imageBuild = dist + '/images';
-
 var htmlFiles = 'app/**/*.html';
 var htmlBuild = dist;
 
 var cssSource = 'app/styles';
-var cssBuild = dist + '/styles';
+var cssBuild = dist;
 var mainLessFile = '/panellist.less';
 
 gulp.task('html', function () {
   return gulp.src(htmlFiles).
     pipe(gulp.dest(htmlBuild));
-});
-
-gulp.task('images', function () {
-  return gulp.src(imageFiles).
-    pipe(gulp.dest(imageBuild));
 });
 
 /* Compile, minify, and compress LESS files */
@@ -74,7 +66,7 @@ function compileScripts(watch) {
     stream.on('error', function (err) { console.error(err); });
     stream = stream.pipe(source(entryFile));
     stream.pipe(rename('panellist.js'));
-    stream.pipe(gulp.dest('dist/bundle'));
+    stream.pipe(gulp.dest('dist'));
   };
 
   if (watch) {
@@ -114,7 +106,6 @@ gulp.task('default', ['server'], function () {
 
   compileScripts(true);
   initWatch(htmlFiles, 'html');
-  initWatch(imageFiles, 'images');
   initWatch(cssSource + '/*.less', ['less']);
 
   gulp.watch([dist + '/**/*'], reloadPage);
