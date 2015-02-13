@@ -1,0 +1,3 @@
+<li class="caption {{ active }}" style="{{ model.position.styleDefinition }}">
+  <div class="caption__inner">{{ model.text }}</div>
+</li>

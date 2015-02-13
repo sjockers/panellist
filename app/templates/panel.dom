@@ -6,6 +6,7 @@
     right: {{ right }}px;">
 
     <img src='{{ model.image }}' />
-    <div data-hook="subpanels"></div>
+    <ul data-hook="subpanels"></ul>
+    <ul data-hook="captions"></ul>
   </div>
 </li>

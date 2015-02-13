@@ -53,10 +53,29 @@ const BasePanelModel = State.extend({
   }
 });
 
+const CaptionModel = State.extend({
+  props: {
+    text: 'string'
+  },
+
+  children: {
+    position: PositionModel
+  },
+
+  collections: {
+    transitions: Collection.extend(UnderscoreMixin, {
+      model: TransitionModel
+    })
+  }
+});
+
 const PanelModel = BasePanelModel.extend({
   collections: {
     subpanels: Collection.extend({
       model: BasePanelModel
+    }),
+    captions: Collection.extend({
+      model: CaptionModel
     })
   }
 });

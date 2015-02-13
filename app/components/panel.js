@@ -3,6 +3,7 @@ import DomthingMixin from 'ampersand-domthing-mixin';
 import _ from 'underscore';
 
 import ViewScrollMixin from './view-scroll-mixin.js';
+import Caption from './caption.js'
 import panelTemplate from '../templates/panel.dom';
 
 const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
@@ -11,14 +12,25 @@ const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
 
   render(opts) {
     this.renderWithTemplate(this);
-
-    if (this.model.subpanels) {
-      this.renderCollection(this.model.subpanels, (options) => {
-        return new Panel(options);
-      }, this.el.querySelector('[data-hook=subpanels]'), opts);
-    }
-
+    this.renderSubpanels(this.model.subpanels);
+    this.renderCaptions(this.model.captions);
     this.registerViewportScrollHandler(this.handleScrolling);
+  },
+
+  renderSubpanels(collection) {
+    if (collection) {
+      this.renderCollection(collection, (options) => {
+        return new Panel(options);
+      }, this.el.querySelector('[data-hook=subpanels]'));
+    }
+  },
+
+  renderCaptions(collection) {
+    if (collection) {
+      this.renderCollection(collection, (options) => {
+        return new Caption(options);
+      }, this.el.querySelector('[data-hook=captions]'));
+    }
   },
 
   updateCssProperty({propertyName, fromValue, toValue, offset}, scrollOffsetTop) {
