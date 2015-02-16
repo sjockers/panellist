@@ -23,17 +23,13 @@ var lrPort = 35731;
 
 /** File paths */
 var dist = 'dist';
-
-var htmlFiles = 'app/**/*.html';
-var htmlBuild = dist;
-
 var cssSource = 'app/styles';
-var cssBuild = dist;
 var mainLessFile = '/panellist.less';
+var staticFiles = 'app/**/*.{html,png,jpg,svg}';
 
-gulp.task('html', function () {
-  return gulp.src(htmlFiles).
-    pipe(gulp.dest(htmlBuild));
+gulp.task('static', function () {
+  return gulp.src(staticFiles).
+    pipe(gulp.dest(dist));
 });
 
 /* Compile, minify, and compress LESS files */
@@ -45,7 +41,7 @@ gulp.task('less', function() {
       browsers: ['last 2 versions'],
       cascade: false
     }),
-    gulp.dest(cssBuild)
+    gulp.dest(dist)
   ]);
 
   // any errors in the above streams will get caught
@@ -76,7 +72,7 @@ function compileScripts(watch) {
   }
 
   bundler.on('update', rebundle);
-  bundler.on('error', function (err) { console.log("Error : " + err.message); })
+  bundler.on('error', function (err) { console.log("Error : " + err.message); });
 
   bundler.transform(domthingify);
   bundler.transform(to5ify.configure({ only: /app/ }));
@@ -105,7 +101,7 @@ gulp.task('default', ['server'], function () {
   }
 
   compileScripts(true);
-  initWatch(htmlFiles, 'html');
+  initWatch(staticFiles, 'static');
   initWatch(cssSource + '/*.less', ['less']);
 
   gulp.watch([dist + '/**/*'], reloadPage);
