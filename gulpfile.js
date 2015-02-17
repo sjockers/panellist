@@ -55,21 +55,19 @@ function compileScripts(watch) {
   gutil.log('Starting browserify');
 
   var entryFile = './app/panellist.js';
-  var bundler;
+
+  var bundler = watchify(browserify(entryFile));
 
   var rebundle = function () {
-    var stream = bundler.bundle({ debug: true});
+    var stream = bundler.bundle({
+      debug: true,
+      standalone: 'panellist'
+    });
     stream.on('error', function (err) { console.error(err); });
     stream = stream.pipe(source(entryFile));
     stream.pipe(rename('panellist.js'));
     stream.pipe(gulp.dest('dist'));
   };
-
-  if (watch) {
-    bundler = watchify(entryFile);
-  } else {
-    bundler = browserify(entryFile);
-  }
 
   bundler.on('update', rebundle);
   bundler.on('error', function (err) { console.log("Error : " + err.message); });
@@ -79,7 +77,6 @@ function compileScripts(watch) {
 
   return rebundle();
 }
-
 
 gulp.task('server', function (next) {
   var server = connect();

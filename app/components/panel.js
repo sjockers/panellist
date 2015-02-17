@@ -3,14 +3,14 @@ import DomthingMixin from 'ampersand-domthing-mixin';
 import _ from 'underscore';
 
 import ViewScrollMixin from './view-scroll-mixin.js';
-import Caption from './caption.js'
+import Caption from './caption.js';
 import panelTemplate from '../templates/panel.dom';
 
 const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
 
   template: panelTemplate,
 
-  render(opts) {
+  render() {
     this.renderWithTemplate(this);
     this.renderSubpanels(this.model.subpanels);
     this.renderCaptions(this.model.captions);

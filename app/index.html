@@ -10,5 +10,168 @@
   <main id="content"></main>
   <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35731/livereload.js?snipver=1"></' + 'script>')</script>
   <script src="panellist.js"></script>
+  <script>
+    panellist('#content', [
+      {
+        image: 'images/142_143_1.png',
+        offset: 0,
+        captions: [{
+          text: 'Doch unser eigentliches Ziel war ein großer Anschlag',
+          offset: 200,
+          position: {
+            left: 20,
+            bottom: 20
+          }
+        }],
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -100
+        }],
+        subpanels: [
+          {
+            image: 'images/142_143_2.png',
+            position: {
+              top: 20,
+              left: 30
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -300
+            }]
+          },
+          {
+            image: 'images/142_143_3.png',
+            position: {
+              bottom: 0,
+              right:  0
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -600
+            },
+            {
+              propertyName: 'top',
+              fromValue: 300,
+              toValue: 0,
+              offset: -600
+            }]
+          },
+          {
+            image: 'images/142_143_3.png',
+            position: {
+              bottom: 0,
+              right:  0
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -600
+            },
+            {
+              propertyName: 'top',
+              fromValue: 300,
+              toValue: 0,
+              offset: -600
+            }]
+          }
+        ]
+      },
+      {
+        image: 'images/142_143_1.png',
+        offset: -200,
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -500
+        }],
+        subpanels: [
+          {
+            image: 'images/142_143_2.png',
+            position: {
+              top: 20,
+              left: 30
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -300
+            }]
+          },
+          {
+            image: 'images/142_143_3.png',
+            position: {
+              bottom: 0,
+              right:  0
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -300
+            },
+            {
+              propertyName: 'top',
+              fromValue: 300,
+              toValue: 0,
+              offset: -600
+            }]
+          }
+        ]
+      },
+      {
+        image: 'images/142_143_1.png',
+        offset: -200,
+        transitions: [{
+          propertyName: 'opacity',
+          fromValue: 0,
+          toValue: 1,
+          offset: -100
+        }],
+        subpanels: [
+          {
+            image: 'images/142_143_2.png',
+            position: {
+              top: 20,
+              left: 30
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -300
+            }]
+          },
+          {
+            image: 'images/142_143_3.png',
+            position: {
+              bottom: 0,
+              right:  0
+            },
+            transitions: [{
+              propertyName: 'opacity',
+              fromValue: 0,
+              toValue: 1,
+              offset: -300
+            },
+            {
+              propertyName: 'top',
+              fromValue: 300,
+              toValue: 0,
+              offset: -600
+            }]
+          }
+        ]
+      }
+    ]);
+  </script>
 </body>
 </html>
