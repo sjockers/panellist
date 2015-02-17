@@ -86,6 +86,12 @@ gulp.task('server', function (next) {
   server.use(connect.static(dist)).listen(serverPort, next);
 });
 
+gulp.task('scripts', function () {
+  compileScripts();
+});
+
+gulp.task('build', ['less', 'scripts']);
+
 /**
  * Run default task
  */
