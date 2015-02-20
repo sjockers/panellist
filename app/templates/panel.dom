@@ -1,12 +1,11 @@
-<li class="panel {{ active }}" style="{{ model.position.styleDefinition }}">
-  <div class="panel__inner" style="
+<li class="panellist__panel {{ model.className }}" style="{{ model.position.styleDefinition }}">
+  <div class="panellist__panel-inner" style="
     background: {{ model.background }};
     opacity: {{ opacity }};
     top: {{ top }}px;
     right: {{ right }}px;">
-
-    <img src='{{ model.image }}' />
-    <ul data-hook="subpanels"></ul>
-    <ul data-hook="captions"></ul>
+    <img class="panellist__image" src='{{ model.image }}' />
+    <ul class="panellist__subpanels" data-hook="subpanels"></ul>
+    <ul class="panellist__captions" data-hook="captions"></ul>
   </div>
 </li>

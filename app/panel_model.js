@@ -39,7 +39,8 @@ const TransitionModel = State.extend({
 const BasePanelModel = State.extend({
   props: {
     image: 'string',
-    offset: 'number'
+    offset: 'number',
+    className: 'string'
   },
 
   children: {
