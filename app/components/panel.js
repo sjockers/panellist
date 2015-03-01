@@ -33,24 +33,24 @@ const Panel = View.extend(DomthingMixin, ViewScrollMixin, {
     }
   },
 
-  updateCssProperty({propertyName, fromValue, toValue, offset}, scrollOffsetTop) {
-    let positioning = _.contains(['top', 'right', 'bottom', 'left'], propertyName);
+  updateCssProperty({propertyName, fromValue, toValue, offset}, scrollOffset) {
+    const positioning = _.contains(['top', 'right', 'bottom', 'left'], propertyName);
+    const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    const elementOffset = this.el.getBoundingClientRect().top + document.body.scrollTop;
 
-    let bounds = this.el.getBoundingClientRect();
-    let height = this.el.clientHeight;
+    const on = elementOffset - viewportHeight;
+    const off = on + offset;
+    const delta = scrollOffset - on;
 
-    let inMin = bounds.top;
-    let inMax = bounds.top + height;
-    let inDelta = scrollOffsetTop - inMin + height + offset;
-    let output = (fromValue - toValue) / (inMin - inMax) * inDelta;
+    let output = delta / (off - on) * (toValue - fromValue);
 
     if (fromValue > toValue) {
-      if (positioning) output = fromValue + output;
+      output = positioning ? fromValue + output : output;
       output = output <= toValue ? toValue : output;
       output = output >= fromValue ? fromValue : output;
     }
     else {
-      if (positioning) output = toValue - output;
+      output = positioning ? toValue - output : output;
       output = output >= toValue ? toValue : output;
       output = output <= fromValue ? fromValue : output;
     }
